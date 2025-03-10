@@ -1,8 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from '../../users/entities/user.entity';
 import { Comment } from './comment.entity';
 import { Like } from './like.entity';
+import { Category } from '../enums/category.enum';
+import { Tag } from './tag.entity';
 
 @Entity()
 export class Wiki {
@@ -18,9 +20,28 @@ export class Wiki {
   @Column('text')
   content: string;
 
-  @ApiProperty({ description: '위키 페이지의 카테고리', required: false })
-  @Column({ nullable: true })
-  category: string;
+  @ApiProperty({ description: '위키 페이지의 카테고리', required: false, enum: Category })
+  @Column({
+    type: 'enum',
+    enum: Category,
+    default: Category.OTHER,
+  })
+  category: Category;
+
+  @ApiProperty({ description: '위키 페이지의 태그 목록', type: () => [Tag] })
+  @ManyToMany(() => Tag, tag => tag.wikis)
+  @JoinTable({
+    name: 'wiki_tags',
+    joinColumn: {
+      name: 'wiki_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'tag_id',
+      referencedColumnName: 'id',
+    },
+  })
+  tags: Tag[];
 
   @ApiProperty({ description: '조회수', default: 0 })
   @Column({ default: 0 })
@@ -30,16 +51,20 @@ export class Wiki {
   @Column({ default: 0 })
   likesCount: number;
 
-  @ApiProperty({ description: '작성자' })
+  @ApiProperty({ description: '작성자', type: () => User })
   @ManyToOne(() => User, user => user.wikis, { nullable: false })
+  @JoinColumn({ name: 'author_id' })
   author: User;
 
-  @ApiProperty({ description: '댓글 목록' })
-  @OneToMany('Comment', 'wiki')
+  @Column({ name: 'author_id' })
+  authorId: number;
+
+  @ApiProperty({ description: '댓글 목록', type: () => [Comment] })
+  @OneToMany(() => Comment, comment => comment.wiki)
   comments: Comment[];
 
-  @ApiProperty({ description: '좋아요 목록' })
-  @OneToMany('Like', 'wiki')
+  @ApiProperty({ description: '좋아요 목록', type: () => [Like] })
+  @OneToMany(() => Like, like => like.wiki)
   likes: Like[];
 
   @ApiProperty({ description: '생성 일시' })

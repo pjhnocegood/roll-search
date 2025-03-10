@@ -1,6 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Wiki } from '../../wiki/entities/wiki.entity';
+import { Comment } from '../../wiki/entities/comment.entity';
+import { Like } from '../../wiki/entities/like.entity';
 
 @Entity()
 export class User {
@@ -13,24 +15,42 @@ export class User {
   githubId: string;
 
   @ApiProperty({ description: '사용자 이름' })
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @ApiProperty({ description: '이메일 주소' })
-  @Column({ nullable: true })
+  @Column({ unique: true })
   email: string;
 
-  @ApiProperty({ description: 'GitHub 프로필 이미지 URL' })
+  @ApiProperty({ description: '비밀번호', required: false })
   @Column({ nullable: true })
-  avatarUrl: string;
+  password?: string;
+
+  @ApiProperty({ description: '지갑 주소', required: false })
+  @Column({ nullable: true })
+  walletAddress?: string;
+
+  @ApiProperty({ description: '프로필 이미지 URL', required: false })
+  @Column({ nullable: true })
+  avatarUrl?: string;
 
   @ApiProperty({ description: '생성한 위키 페이지 목록' })
   @OneToMany(() => Wiki, wiki => wiki.author)
   wikis: Wiki[];
 
+  @ApiProperty({ description: '생성한 댓글 목록' })
+  @OneToMany(() => Comment, comment => comment.author)
+  comments: Comment[];
+
+  @ApiProperty({ description: '생성한 좋아요 목록' })
+  @OneToMany(() => Like, like => like.user)
+  likes: Like[];
+
+  @ApiProperty({ description: '생성 일시' })
   @CreateDateColumn()
   createdAt: Date;
 
+  @ApiProperty({ description: '수정 일시' })
   @UpdateDateColumn()
   updatedAt: Date;
 } 

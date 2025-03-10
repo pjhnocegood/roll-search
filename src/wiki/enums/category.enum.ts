@@ -1,0 +1,16 @@
+export enum Category {
+  ADMINISTRIVIA = 'Administrivia',
+  SECURITY = 'Security',
+  NETWORKING = 'Networking',
+  EXECUTION_LAYER_RESEARCH = 'Execution Layer Research',
+  PROOF_OF_STAKE = 'Proof-of-Stake',
+  LAYER_2 = 'Layer 2',
+  CONSENSUS = 'Consensus',
+  EVM = 'EVM',
+  APPLICATIONS = 'APPLICATIONS',
+  DECENTRALIZED_EXCHANGES = 'Decentralized exchanges',
+  ARCHITECTURE = 'Architecture',
+  INFRASTRUCTURE = 'INFRASTRUCTURE',
+  TOOLING = 'TOOLING',
+  OTHER = 'OTHER',
+} 

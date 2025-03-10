@@ -4,11 +4,14 @@ import { Repository } from 'typeorm';
 import { Wiki } from './entities/wiki.entity';
 import { Comment } from './entities/comment.entity';
 import { Like } from './entities/like.entity';
+import { Tag, TagType } from './entities/tag.entity';
 import { UsersService } from '../users/users.service';
 import { CreateWikiDto } from './dto/create-wiki.dto';
+import { UpdateWikiDto } from './dto/update-wiki.dto';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { User } from '../users/entities/user.entity';
+import { FindAllWikiDto } from './dto/find-all-wiki.dto';
 
 @Injectable()
 export class WikiService {
@@ -19,27 +22,65 @@ export class WikiService {
     private commentRepository: Repository<Comment>,
     @InjectRepository(Like)
     private likeRepository: Repository<Like>,
+    @InjectRepository(Tag)
+    private tagRepository: Repository<Tag>,
     private usersService: UsersService,
   ) {}
 
+  private async getOrCreateTags(tagNames: TagType[]): Promise<Tag[]> {
+    const tags = await Promise.all(
+      tagNames.map(async (name) => {
+        let tag = await this.tagRepository.findOne({ where: { name } });
+        if (!tag) {
+          tag = this.tagRepository.create({ name });
+          tag = await this.tagRepository.save(tag);
+        }
+        return tag;
+      })
+    );
+    return tags;
+  }
+
   async create(createWikiDto: CreateWikiDto, user: User): Promise<Wiki> {
+    // 사용자 존재 여부 확인
+    const existingUser = await this.usersService.findOne(user.id);
+    if (!existingUser) {
+      throw new NotFoundException(`사용자 ID ${user.id}를 찾을 수 없습니다.`);
+    }
+
+    const tags = createWikiDto.tags ? await this.getOrCreateTags(createWikiDto.tags) : [];
     const wiki = this.wikiRepository.create({
       ...createWikiDto,
-      author: user,
+      author: existingUser,
+      authorId: existingUser.id,
+      tags,
     });
     return this.wikiRepository.save(wiki);
   }
 
-  async findAll(): Promise<Wiki[]> {
-    return this.wikiRepository.find({
-      relations: ['author', 'comments', 'likes'],
-    });
+  async findAll(findAllWikiDto: FindAllWikiDto): Promise<Wiki[]> {
+    const queryBuilder = this.wikiRepository
+      .createQueryBuilder('wiki')
+      .leftJoinAndSelect('wiki.author', 'author')
+      .leftJoinAndSelect('wiki.comments', 'comments')
+      .leftJoinAndSelect('wiki.likes', 'likes')
+      .leftJoinAndSelect('wiki.tags', 'tags');
+
+    if (findAllWikiDto.category) {
+      queryBuilder.andWhere('wiki.category = :category', { category: findAllWikiDto.category });
+    }
+
+    if (findAllWikiDto.tag) {
+      queryBuilder.andWhere('tags.name = :tag', { tag: findAllWikiDto.tag });
+    }
+
+    return queryBuilder.getMany();
   }
 
   async findOne(id: number): Promise<Wiki> {
     const wiki = await this.wikiRepository.findOne({
       where: { id },
-      relations: ['author', 'comments', 'likes'],
+      relations: ['author', 'comments', 'likes', 'tags'],
     });
     if (!wiki) {
       throw new NotFoundException(`위키 ID ${id}를 찾을 수 없습니다.`);
@@ -47,29 +88,35 @@ export class WikiService {
     return wiki;
   }
 
-  async update(id: number, updateWikiDto: Partial<Wiki>, userId: number): Promise<Wiki> {
-    const author = await this.usersService.findOne(userId);
-    await this.wikiRepository.update(id, {
-      ...updateWikiDto,
-      lastEditedBy: author.username,
-    });
-    return this.findOne(id);
+  async update(id: number, updateWikiDto: UpdateWikiDto, user: User): Promise<Wiki> {
+    const wiki = await this.findOne(id);
+    if (wiki.authorId !== user.id) {
+      throw new ForbiddenException('자신이 작성한 글만 수정할 수 있습니다.');
+    }
+
+    if (updateWikiDto.tags) {
+      wiki.tags = await this.getOrCreateTags(updateWikiDto.tags);
+    }
+
+    Object.assign(wiki, updateWikiDto);
+    wiki.lastEditedBy = user.username;
+    return this.wikiRepository.save(wiki);
   }
 
   async delete(id: number): Promise<void> {
     const result = await this.wikiRepository.delete(id);
     if (result.affected === 0) {
-      throw new NotFoundException(`Wiki with ID ${id} not found`);
+      throw new NotFoundException(`위키 ID ${id}를 찾을 수 없습니다.`);
     }
   }
 
   async findByTitle(title: string): Promise<Wiki> {
     const wiki = await this.wikiRepository.findOne({
       where: { title },
-      relations: ['author', 'comments', 'comments.author', 'likes'],
+      relations: ['author', 'comments', 'likes'],
     });
     if (!wiki) {
-      throw new NotFoundException(`Wiki with title ${title} not found`);
+      throw new NotFoundException(`제목 "${title}"의 위키를 찾을 수 없습니다.`);
     }
     return wiki;
   }
@@ -104,7 +151,7 @@ export class WikiService {
     }
 
     comment.content = content;
-    return await this.commentRepository.save(comment);
+    return this.commentRepository.save(comment);
   }
 
   async deleteComment(commentId: number, userId: number): Promise<void> {

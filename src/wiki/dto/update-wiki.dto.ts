@@ -3,20 +3,24 @@ import { IsString, IsOptional, IsEnum, IsArray } from 'class-validator';
 import { Category } from '../enums/category.enum';
 import { TagType } from '../entities/tag.entity';
 
-export class CreateWikiDto {
+export class UpdateWikiDto {
   @ApiProperty({
     description: '위키 페이지의 제목',
     example: '자바스크립트 소개',
+    required: false,
   })
+  @IsOptional()
   @IsString()
-  title: string;
+  title?: string;
 
   @ApiProperty({
     description: '위키 페이지의 내용',
     example: '자바스크립트는 웹 브라우저에서 실행되는 프로그래밍 언어입니다.',
+    required: false,
   })
+  @IsOptional()
   @IsString()
-  content: string;
+  content?: string;
 
   @ApiProperty({
     description: '위키 페이지의 카테고리',
@@ -30,9 +34,9 @@ export class CreateWikiDto {
 
   @ApiProperty({
     description: '위키 페이지의 태그 목록',
-    required: false,
     type: [String],
     enum: TagType,
+    required: false,
   })
   @IsOptional()
   @IsArray()

@@ -10,18 +10,19 @@ export class Like {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ description: '사용자' })
+  @ApiProperty({ description: '사용자', type: () => User })
   @ManyToOne(() => User, { nullable: false })
   user: User;
 
-  @ApiProperty({ description: '위키 페이지' })
-  @ManyToOne('Wiki', 'likes', { nullable: false, onDelete: 'CASCADE' })
+  @ApiProperty({ description: '위키 페이지', type: () => Wiki })
+  @ManyToOne(() => Wiki, wiki => wiki.likes, { nullable: false, onDelete: 'CASCADE' })
   wiki: Wiki;
 
   @ApiProperty({ description: '생성 일시' })
   @CreateDateColumn()
   createdAt: Date;
 
+  @ApiProperty({ description: '좋아요 상태' })
   @Column()
   isLiked: boolean;
 } 
