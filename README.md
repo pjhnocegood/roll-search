@@ -1,3 +1,15 @@
+<h1 align="center">Roll-search</h1>
+<h3 align="center">Community Knowledge Hub for Scroll Ecosystem</h3>
+
+<p align="center">
+  <a href="" style="color: #a77dff">Platform</a> | <a href="" style="color: #a77dff">Pitchdeck</a> | <a href="" style="color: #a77dff">Demo Video</a>
+</p>
+<p align="center">
+  <a href="" style="color: #a77dff">Scroll contract</a> | <a href="" style="color: #a77dff">AI agent</a>
+</p>
+
+---
+
 ## Overview 
 **Rollsearch** is a **community-driven knowledge-sharing platform** for the **Scroll ecosystem**, functioning like **Reddit or Wikipedia** but exclusively for Scroll-related content. It enables users to **discover, discuss, and contribute** valuable information while earning **points** through high-quality engagement.  
 
