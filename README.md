@@ -1,98 +1,41 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## Overview 
+**Rollsearch** is a **community-driven knowledge-sharing platform** for the **Scroll ecosystem**, functioning like **Reddit or Wikipedia** but exclusively for Scroll-related content. It enables users to **discover, discuss, and contribute** valuable information while earning **points** through high-quality engagement.  
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+With **on-chain voting**, **GitHub authentication**, and **AI-powered promotion**, Rollsearch fosters an **interactive, transparent, and rewarding** environment for users to explore and support the Scroll ecosystem.  
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Problem 
+- Navigating various **Scroll-based projects** is difficult due to a lack of centralized resources.  
+- **Limited educational and community-driven content** about Scroll.  
+- No structured **incentive system** to encourage contributions.  
 
-## Description
+## Solution
+Rollsearch provides a **community-built knowledge hub**, where users can create, engage with, and explore Scroll-related content. The platform rewards meaningful participation, promoting knowledge-sharing and project discovery within the Scroll ecosystem.  
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Key Features  
+- **GitHub Authentication**: Secure login to ensure verified, high-quality contributions.  
+- **On-Chain Voting & Points System**: Users vote on posts using **Scroll tokens**, while content creators earn **points** based on engagement.  
+- **AI Twitter Promotion**: Top-voted posts are automatically shared on Twitter, increasing exposure for both the content and the Scroll ecosystem.  
+- **Referral System**: Users earn rewards for referring new contributors to the platform.  
+- **Weekly Top Content**: The most voted posts are rewarded and promoted every week.  
 
-## Project setup
+## How It Works  
+1. **Content Creation & Engagement**  
+   - Users log in via GitHub and create **Scroll-related** posts.  
+   - Posts can include **text, images, links, and references**.  
+   - Community members engage through **comments and on-chain voting**.  
 
-```bash
-$ npm install
-```
+2. **On-Chain Voting & Rewards**  
+   - Users vote on helpful posts using **Scroll tokens**.  
+   - Creators **earn points** based on engagement and votes.  
+   - High-quality contributions are **incentivized and rewarded**.  
 
-## Compile and run the project
+3. **AI-Driven Promotion**  
+   - **Every 7 days**, top-voted posts are compiled.  
+   - These posts are **automatically shared on Twitter** to promote both the content and the Scroll ecosystem.  
 
-```bash
-# development
-$ npm run start
+## How Scroll is Integrated  
+- **On-Chain Voting**: Scroll tokens are used for voting, ensuring **transparent** and **immutable** engagement.  
+- **Ecosystem Growth**: Rollsearch serves as a **knowledge hub** for Scroll-based projects, helping users discover and learn.  
+- **Decentralized Contributions**: Community-driven discussions and knowledge-sharing align with Scroll’s **decentralized ethos**.  
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Rollsearch bridges the gap between **Scroll ecosystem projects** and **community engagement**, ensuring **better accessibility, collaboration, and growth**.
