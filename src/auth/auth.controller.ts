@@ -33,9 +33,11 @@ export class AuthController {
   @UseGuards(AuthGuard('github'))
   @ApiOperation({ summary: 'GitHub 로그인 콜백' })
   @ApiResponse({ status: 200, description: '로그인 성공' })
-  async githubAuthCallback(@Req() req, @Res() res) {
+  async githubAuthCallback(@Req() req) {
     const { access_token } = await this.authService.login(req.user);
 
-    return { accessToken: access_token };
+    console.log('access_token:', access_token);
+    // 프론트엔드 URL로 리다이렉트 (토큰과 함께)
+    return { access_token};
   }
 } 
