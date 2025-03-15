@@ -2,7 +2,7 @@
 <h3 align="center">Community Knowledge Hub for Scroll Ecosystem</h3>
 
 <p align="center">
-  <a href="" style="color: #a77dff">Platform</a> | <a href="" style="color: #a77dff">Pitchdeck</a> | <a href="" style="color: #a77dff">Demo Video</a>
+  <a href="" style="color: #a77dff">Platform</a> | <a href="https://www.figma.com/deck/oKoTo0IXi8XfsmnmDZiwPC" style="color: #a77dff">Pitchdeck</a> | <a href="" style="color: #a77dff">Demo Video</a>
 </p>
 
 <h2 align="center">Sponsor (Click on the logo)</h2>
