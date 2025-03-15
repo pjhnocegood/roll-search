@@ -35,8 +35,7 @@ export class AuthController {
   @ApiResponse({ status: 200, description: '로그인 성공' })
   async githubAuthCallback(@Req() req, @Res() res) {
     const { access_token } = await this.authService.login(req.user);
-    
-    // 프론트엔드 URL로 리다이렉트 (토큰과 함께)
-    res.redirect(`http://localhost:3000/login/success?token=${access_token}`);
+
+    return { accessToken: access_token };
   }
 } 
