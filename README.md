@@ -2,13 +2,13 @@
 <h3 align="center">Community Knowledge Hub for Scroll Ecosystem</h3>
 
 <p align="center">
-  <a href="" style="color: #a77dff">Platform</a> | <a href="https://www.figma.com/deck/oKoTo0IXi8XfsmnmDZiwPC" style="color: #a77dff">Pitchdeck</a> | <a href="" style="color: #a77dff">Demo Video</a>
+  <a href="https://www.figma.com/deck/oKoTo0IXi8XfsmnmDZiwPC" style="color: #a77dff">Pitchdeck</a> | <a href="https://youtu.be/4e9xqhtBOE0" style="color: #a77dff">Demo Video</a>
 </p>
 
 <h2 align="center">Sponsor (Click on the logo)</h2>
 
 <p align="center">
-<a href="" height="5" width="10" target="_blank">
+<a href="https://sepolia.scrollscan.com/address/0x3EA80fA63b1E351f298033D299fBd7b21ccaBF70#code" height="5" width="10" target="_blank">
 	<img src="https://github.com/user-attachments/assets/4ea7a04c-7b1e-497f-8d60-7abee6f3c8a0" width="200" height="60">
 <a><a href="" height="5" width="10" target="_blank">
 	<img src="https://github.com/user-attachments/assets/9155c079-210e-46d0-bb11-865e2e90f68e" width="100" height="100">
