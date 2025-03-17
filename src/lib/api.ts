@@ -1,7 +1,8 @@
 // lib/api.js
 import axios from 'axios';
 
-const storedToken = localStorage.getItem("token");
+const storedToken = sessionStorage.getItem("token");
+
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API_URL, // API의 기본 경로 설정
